@@ -406,8 +406,7 @@ def authenhandler(req):
             req.connection.id, req.method, req.clength, auth_headers), apache.APLOG_INFO)
 	    # ToDo
             # if req.method!='POST' or req.clength>0:
-	    if req.clength>0:
-                return apache.OK
+            return apache.OK
         else:
             return apache.OK
     
