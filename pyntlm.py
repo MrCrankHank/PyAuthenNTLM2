@@ -276,7 +276,9 @@ def check_authorization(req, username, proxy):
     @return     True if the user is authorized, False otherwise.
     '''
    
-    rules = ''.join(req.requires()).strip()
+    # ToDo
+    rules = ''.join(req.get_options()['Require'])
+    #rules = ''.join(req.requires()).strip()
     if rules=='valid-user' or cacheGroups.has(rules, username):
         return True
     groups = []
@@ -402,7 +404,9 @@ def authenhandler(req):
         if  auth_headers:
             req.log_error('PYTNLM: Spurious authentication request on connection 0x%X. Method = %s. Content-Length = %d. Headers = %s' % (
             req.connection.id, req.method, req.clength, auth_headers), apache.APLOG_INFO)
-            if req.method!='POST' or req.clength>0:
+	    # ToDo
+            # if req.method!='POST' or req.clength>0:
+	    if req.clength>0:
                 return apache.OK
         else:
             return apache.OK
